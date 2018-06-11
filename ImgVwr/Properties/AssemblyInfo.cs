@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("ImgVwr")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AndreiLucaci")]
 [assembly: AssemblyProduct("ImgVwr")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

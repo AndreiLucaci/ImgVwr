@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImgVwr"
         mc:Ignorable="d"
+        Icon="logo_LJn_icon.ico"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Image HorizontalAlignment="Center" 
+               Margin="12,12,0,0" 
+               Name="ImageHolder" 
+               Stretch="Uniform" 
+               VerticalAlignment="Top"
+               />
     </Grid>
 </Window>

@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ImgVwr.Models;
 
 namespace ImgVwr
 {
@@ -20,9 +10,78 @@ namespace ImgVwr
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly Engine _engine;
+
+        public MainWindow(string currentFile = null)
         {
+            _engine = new Engine(currentFile);
+
             InitializeComponent();
+
+            if (!string.IsNullOrEmpty(currentFile))
+            {
+                SetImage(_engine.LoadImage(currentFile));
+            }
+            else
+            {
+                SetImage(_engine.Next());
+            }
+
+            RegisterAllEvents();
+            SetUpImageZoom();
+        }
+
+        private void RegisterAllEvents()
+        {
+            KeyUp += (sender, args) =>
+            {
+                if (args.Key == Key.Left)
+                {
+                    SetImage(_engine.Previous());
+                }
+                if (args.Key == Key.Right)
+                {
+                    SetImage(_engine.Next());
+                }
+            };
+
+            MouseWheel += MainWindow_OnMouseWheel;
+        }
+
+        private void SetImage(ImageModel model)
+        {
+            if (model?.ImageSource != null)
+            {
+                ImageHolder.Source = model.ImageSource;
+
+                Title = model.Name;
+            }
+        }
+
+        private void MainWindow_OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var transformGroup = (TransformGroup)ImageHolder.RenderTransform;
+            var transform = (ScaleTransform)transformGroup.Children[0];
+
+            var zoom = e.Delta > 0 ? .2 : -.2;
+            transform.ScaleX += zoom;
+            transform.ScaleY += zoom;
+
+            var position = e.GetPosition(ImageHolder);
+            ImageHolder.RenderTransformOrigin = new Point(position.X / ImageHolder.ActualWidth, position.Y / ImageHolder.ActualHeight);
+        }
+
+        private void SetUpImageZoom()
+        {
+            var group = new TransformGroup();
+
+            var xform = new ScaleTransform();
+            group.Children.Add(xform);
+
+            var tt = new TranslateTransform();
+            group.Children.Add(tt);
+
+            ImageHolder.RenderTransform = group;
         }
     }
 }

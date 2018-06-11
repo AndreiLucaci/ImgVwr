@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 
 namespace ImgVwr
@@ -13,5 +8,13 @@ namespace ImgVwr
     /// </summary>
     public partial class App : Application
     {
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            var currentFile = e.Args.SingleOrDefault();
+
+            var mainWindow = new MainWindow(currentFile);
+
+            mainWindow.Show();
+        }
     }
 }
