@@ -60,15 +60,19 @@ namespace ImgVwr
 
         private void MainWindow_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var transformGroup = (TransformGroup)ImageHolder.RenderTransform;
-            var transform = (ScaleTransform)transformGroup.Children[0];
+            if (_engine.IsValid())
+            {
+                var transformGroup = (TransformGroup)ImageHolder.RenderTransform;
+                var transform = (ScaleTransform)transformGroup.Children[0];
 
-            var zoom = e.Delta > 0 ? .2 : -.2;
-            transform.ScaleX += zoom;
-            transform.ScaleY += zoom;
+                var zoom = e.Delta > 0 ? .2 : -.2;
+                transform.ScaleX += zoom;
+                transform.ScaleY += zoom;
 
-            var position = e.GetPosition(ImageHolder);
-            ImageHolder.RenderTransformOrigin = new Point(position.X / ImageHolder.ActualWidth, position.Y / ImageHolder.ActualHeight);
+                var position = e.GetPosition(ImageHolder);
+                ImageHolder.RenderTransformOrigin = new Point(position.X / ImageHolder.ActualWidth,
+                    position.Y / ImageHolder.ActualHeight);
+            }
         }
 
         private void SetUpImageZoom()

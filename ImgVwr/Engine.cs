@@ -75,6 +75,11 @@ namespace ImgVwr
             };
         }
 
+        public bool IsValid()
+        {
+            return !string.IsNullOrEmpty(_currentFile) || _availablePhotos.Any();
+        }
+
         private void LoadPhotosFromCurrentDirectory()
         {
             var accumullator = new List<string>();
