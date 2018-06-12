@@ -23,3 +23,6 @@ Simple program to view images.
 2. View photo
 
 ![img-url](https://i.imgur.com/92JOvtF.png)
+
+3. Demo
+![demo](https://i.imgur.com/7ioMnaD.mp4)
