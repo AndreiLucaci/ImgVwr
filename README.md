@@ -25,4 +25,4 @@ Simple program to view images.
 ![img-url](https://i.imgur.com/92JOvtF.png)
 
 3. Demo
-![demo](https://i.imgur.com/7ioMnaD.gifv)
+![demo](https://i.imgur.com/7ioMnaD.gif)
